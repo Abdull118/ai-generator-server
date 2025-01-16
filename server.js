@@ -8,9 +8,6 @@ import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import cors from "cors";
 
-
-
-
 // Define __dirname manually
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -26,6 +23,10 @@ app.use(cors());
 const mongoClient = new MongoClient(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+});
+
+app.get("/keep-alive", (req, res) => {
+  res.status(200).send("Alive and well");
 });
 
 app.post("/generate-questions", async (req, res) => {
